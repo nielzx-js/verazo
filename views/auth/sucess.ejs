@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verazo - Plataforma de Oportunidades</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            verazoBg: '#FAF6F0',
+            verazoCard: '#FFFFFF',
+            verazoGold: '#DBB14C',
+            verazoGoldHover: '#C89F3A',
+            verazoDark: '#1E232A',
+            verazoGray: '#6B7280',
+            verazoLightGray: '#F3EFEA',
+            verazoBorder: '#E5DFD7',
+            verazoAccent: '#EFE7DC'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FAF6F0;
+      color: #1E232A;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #FAF6F0;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #D1C7BD;
+      border-radius: 4px;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased bg-verazoBg text-verazoDark">
+
+  <!-- TOP SWITCHER / TOOLBAR FOR DEMO NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-verazoDark text-white border-b border-gray-800 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center space-x-3">
+        <div class="bg-verazoGold text-verazoDark font-bold px-2.5 py-1 rounded-md text-sm tracking-wider">VERAZO</div>
+        <span class="text-xs text-gray-400 hidden sm:inline">| Visualizador de Telas Estáticas (10 Telas)</span>
+      </div>
+
+      <!-- Screen Selector -->
+      <div class="flex items-center gap-2 w-full sm:w-auto">
+        <label for="screenSelect" class="text-xs font-medium text-gray-300 shrink-0">Selecione a Tela:</label>
+        <select id="screenSelect" onchange="switchScreen(this.value)" class="bg-gray-800 text-verazoGold font-semibold text-xs rounded-lg px-3 py-1.5 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-verazoGold w-full sm:w-72 cursor-pointer shadow-inner">
+          <optgroup label="Fluxo de Autenticação">
+            <option value="screen1">1. Cadastro (Criar Conta)</option>
+            <option value="screen2">2. Login (Bem-vindo)</option>
+            <option value="screen3">3. Redefinição - Passo 1</option>
+            <option value="screen4">4. Redefinição - Passo 2</option>
+            <option value="screen5">5. Senha Redefinida (Sucesso)</option>
+          </optgroup>
+          <optgroup label="Plataforma & Dashboards">
+            <option value="screen6">6. Oportunidades / Vagas</option>
+            <option value="screen7">7. Dashboard (Plano Gratuito)</option>
+            <option value="screen8">8. Dashboard (Plano Premium)</option>
+            <option value="screen9">9. Indicadores Profissionais</option>
+            <option value="screen10">10. Mensagens / Chat</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER FOR SCREENS -->
+  <main class="flex-1 flex flex-col justify-center items-center p-3 sm:p-6 md:p-8">
+
+    <!-- ========================================================================= -->
+    <!-- TELA 1: CADASTRO -->
+    <!-- ========================================================================= -->
+    <div id="screen1" class="screen-content w-full max-w-md mx-auto py-6">
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center justify-center space-x-2 mb-2">
+          <div class="w-10 h-10 bg-verazoGold rounded-xl flex items-center justify-center text-verazoDark font-bold text-xl shadow-sm">V</div>
+          <span class="text-2xl font-bold tracking-tight text-verazoDark">Verazo</span>
+        </div>
+        <h2 class="text-2xl font-bold text-verazoDark mt-2">Crie sua conta Verazo</h2>
+        <p class="text-sm text-verazoGray mt-1">Preencha seus dados para começar</p>
+      </div>
+
+      <div class="bg-verazoBg p-2">
+        <form onsubmit="event.preventDefault(); switchScreen('screen2');" class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-verazoDark mb-1">Nome completo</label>
+            <input type="text" placeholder="Seu nome completo" class="w-full px-4 py-3 rounded-lg border border-verazoBorder bg-white text-sm focus:outline-none focus:ring-2 focus:ring-verazoGold transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-verazoDark mb-1">E-mail corporativo</label>
+            <input type="email" placeholder="voce@empresa.com.br" class="w-full px-4 py-3 rounded-lg border border-verazoBorder bg-white text-sm focus:outline-none focus:ring-2 focus:ring-verazoGold transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-verazoDark mb-1">Senha</label>
+            <div class="relative">
+              <input type="password" placeholder="Crie uma senha" class="w-full px-4 py-3 rounded-lg border border-verazoBorder bg-white text-sm focus:outline-none focus:ring-2 focus:ring-verazoGold transition pr-10">
+              <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                <i data-lucide="eye-off" class="w-5 h-5"></i>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-verazoDark mb-1">Confirmar senha</label>
+            <div class="relative">
+              <input type="password" placeholder="Repita sua senha" class="w-full px-4 py-3 rounded-lg border border-verazoBorder bg-white text-sm focus:outline-none focus:ring-2 focus:ring-verazoGold transition pr-10">
+              <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                <i data-lucide="eye-off" class="w-5 h-5"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center pt-1">
+            <input id="terms" type="checkbox" class="w-4 h-4 rounded border-gray-300 text-verazoGold focus:ring-verazoGold accent-verazoGold cursor-pointer">
+            <label for="terms" class="ml-2 text-xs text-verazoDark cursor-pointer">Concordo com os <a href="#" class="font-semibold underline">termos de uso</a></label>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 px-4 bg-verazoGold hover:bg-verazoGoldHover text-verazoDark font-bold text-xs uppercase tracking-wider rounded-lg shadow-sm transition mt-4">
+            CRIAR CONTA VERAZO
+          </button>
+        </form>
+
+        <div class="mt-6 text-center">
+          <p class="text-xs text-verazoGray">
+            Já tem conta? <button onclick="switchScreen('screen2')" class="font-semibold text-verazoDark hover:underline">Faça login</button>
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- TELA 2: LOGIN -->
+    <!-- ========================================================================= -->
+    <div id="screen2" class="screen-content w-full max-w-md mx-auto py-6 hidden">
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center justify-center space-x-2 mb-2">
+          <div class="w-10 h-10 bg-verazoGold rounded-xl flex items-center justify-center text-verazoDark font-bold text-xl shadow-sm">V</div>
+          <span class="text-2xl font-bold tracking-tight text-verazoDark">Verazo</span>
+        </div>
+        <h2 class="text-2xl font-bold text-verazoDark mt-2">Bem-vindo de volta</h2>
+        <p class="text-xs text-verazoGray mt-1">Entre na sua conta e acompanhe suas oportunidades no Verazo.</p>
+      </div>
+
+      <div class="bg-verazoBg p-2">
+        <form onsubmit="event.preventDefault(); switchScreen('screen6');" class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-verazoDark mb-1">E-mail corporativo</label>
+            <input type="email" value="voce@empresa.com.br" class="w-full px-4 py-3 rounded-lg border border-verazoBorder bg-white text-sm focus:outline-none focus:ring-2 focus:ring-verazoGold transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-verazoDark mb-1">Senha</label>
+            <div class="relative">
+              <input type="password" placeholder="Digite sua senha" class="w-full px-4 py-3 rounded-lg border border-verazoBorder bg-white text-sm focus:outline-none focus:ring-2 focus:ring-verazoGold transition pr-10">
+              <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                <i data-lucide="eye-off" class="w-5 h-5"></i>
+              </button>
+            </div>
+            <div class="text-right mt-1.5">
+              <button type="button" onclick="switchScreen('screen3')" class="text-xs text-verazoGray hover:text-verazoDark">
+                Esqueceu sua senha? <span class="font-bold text-verazoDark">Redefinir</span>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 px-4 bg-verazoGold hover:bg-verazoGoldHover text-verazoDark font-bold text-xs uppercase tracking-wider rounded-lg shadow-sm transition mt-2">
+            ENTRAR NO VERAZO
+          </button>
+        </form>
+
+        <div class="mt-6 text-center">
+          <p class="text-xs text-verazoGray">
+            Ainda não tem conta? <button onclick="switchScreen('screen1')" class="font-semibold text-verazoDark hover:underline">Cadastre-se</button>
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- TELA 3: REDEFINIÇÃO DE SENHA - PASSO 1 -->
+    <!-- ========================================================================= -->
+    <div id="screen3" class="screen-content w-full max-w-md mx-auto py-6 hidden">
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center justify-center space-x-2 mb-2">
+          <div class="w-10 h-10 bg-verazoGold rounded-xl flex items-center justify-center text-verazoDark font-bold text-xl shadow-sm">V</div>
+          <span class="text-2xl font-bold tracking-tight text-verazoDark">Verazo</span>
+        </div>
+        <h2 class="text-2xl font-bold text-verazoDark mt-2">Redefinição de senha</h2>
+        <p class="text-xs text-verazoGray mt-1 px-4">Informe seu e-mail corporativo e o código de redefinição recebido para continuar.</p>
+      </div>
+
+      <div class="bg-verazoBg p-2">
+        <form onsubmit="event.preventDefault(); switchScreen('screen4');" class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-verazoDark mb-1">E-mail corporativo</label>
+            <input type="email" value="voce@empresa.com.br" class="w-full px-4 py-3 rounded-lg border border-verazoBorder bg-white text-sm focus:outline-none focus:ring-2 focus:ring-verazoGold transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-verazoDark mb-1">Código de redefinição de senha</label>
+            <input type="text" placeholder="Digite o código recebido" class="w-full px-4 py-3 rounded-lg border border-verazoBorder bg-white text-sm focus:outline-none focus:ring-2 focus:ring-verazoGold transition">
+          </div>
+
+          <button type="submit" class="w-full py-3.5 px-4 bg-verazoGold hover:bg-verazoGoldHover text-verazoDark font-bold text-xs uppercase tracking-wider rounded-lg shadow-sm transition mt-4">
+            PRÓXIMO
+          </button>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- TELA 4: REDEFINIÇÃO DE SENHA - PASSO 2 (NOVA SENHA) -->
+    <!-- ========================================================================= -->
+    <div id="screen4" class="screen-content w-full max-w-md mx-auto py-6 hidden">
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center justify-center space-x-2 mb-2">
+          <div class="w-10 h-10 bg-verazoGold rounded-xl flex items-center justify-center text-verazoDark font-bold text-xl shadow-sm">V</div>
+          <span class="text-2xl font-bold tracking-tight text-verazoDark">Verazo</span>
+        </div>
+        <h2 class="text-2xl font-bold text-verazoDark mt-2">Redefinição de senha</h2>
+        <p class="text-xs text-verazoGray mt-1 px-4">Escolha uma nova senha para acessar sua conta com segurança.</p>
+      </div>
+
+      <div class="bg-verazoBg p-2">
+        <form onsubmit="event.preventDefault(); switchScreen('screen5');" class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-verazoDark mb-1">Nova senha</label>
+            <div class="relative">
+              <input type="password" placeholder="Digite sua nova senha" class="w-full px-4 py-3 rounded-lg border border-verazoBorder bg-white text-sm focus:outline-none focus:ring-2 focus:ring-verazoGold transition pr-10">
+              <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                <i data-lucide="eye-off" class="w-5 h-5"></i>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-verazoDark mb-1">Confirmar nova senha</label>
+            <div class="relative">
+              <input type="password" placeholder="Repita sua nova senha" class="w-full px-4 py-3 rounded-lg border border-verazoBorder bg-white text-sm focus:outline-none focus:ring-2 focus:ring-verazoGold transition pr-10">
+              <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                <i data-lucide="eye-off" class="w-5 h-5"></i>
+              </button>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-verazoGray">Use pelo menos 8 caracteres, incluindo letras e números.</p>
+
+          <button type="submit" class="w-full py-3.5 px-4 bg-verazoGold hover:bg-verazoGoldHover text-verazoDark font-bold text-xs uppercase tracking-wider rounded-lg shadow-sm transition mt-2">
+            PRÓXIMO
+          </button>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- TELA 5: SUCESSO NA REDEFINIÇÃO -->
+    <!-- ========================================================================= -->
+    <div id="screen5" class="screen-content w-full max-w-md mx-auto py-12 hidden">
+      <div class="text-center space-y-6">
+        <div class="inline-flex items-center justify-center space-x-2">
+          <div class="w-12 h-12 bg-verazoGold rounded-xl flex items-center justify-center text-verazoDark font-bold text-2xl shadow-sm">V</div>
+          <span class="text-3xl font-bold tracking-tight text-verazoDark">Verazo</span>
+        </div>
+
+        <div class="py-6 flex flex-col items-center">
+          <div class="w-16 h-16 bg-[#EFE7DC] rounded-full flex items-center justify-center mb-6">
+            <i data-lucide="check" class="w-8 h-8 text-verazoDark stroke-[3]"></i>
+          </div>
+
+          <h2 class="text-2xl font-bold text-verazoDark leading-snug">Senha redefinida com<br>sucesso!</h2>
+          <p class="text-xs text-verazoGray mt-4">Redirecionando para Verazo...</p>
+        </div>
+
+        <div class="pt-4">
+          <button onclick="switchScreen('screen2')" class="text-xs font-semibold text-verazoDark underline">Ir para o login agora</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- LAYOUT DE DASHBOARD COMPARTILHADO PARA TELAS 6, 7, 8, 9, 10 -->
+    <!-- ========================================================================= -->
+    <div id="appShell" class="screen-content w-full max-w-7xl mx-auto bg-verazoBg rounded-2xl shadow-lg border border-verazoBorder overflow-hidden hidden flex flex-col md:flex-row min-h-[780px]">
+      
+      <!-- SIDEBAR COMPONENTE -->
+      <aside class="w-full md:w-64 bg-verazoBg border-r border-verazoBorder flex flex-col justify-between shrink-0">
+        <div>
+          <!-- Logo -->
+          <div class="p-5 border-b border-verazoBorder/60 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <div class="w-7 h-7 bg-verazoGold rounded-lg flex items-center justify-center text-verazoDark font-bold text-base shadow-sm">V</div>
+              <span class="text-lg font-bold text-verazoDark tracking-tight">Verazo</span>
+            </div>
+            <span class="text-[10px] font-semibold bg-verazoAccent px-2 py-0.5 rounded text-verazoDark">v2.4</span>
+          </div>
+
+          <!-- Navigation Links -->
+          <nav class="p-3 space-y-1">
+            <button onclick="switchScreen('screen7')" id="nav-screen7" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-medium text-verazoDark hover:bg-verazoAccent/70 transition">
+              <i data-lucide="layout-dashboard" class="w-4 h-4 text-verazoGray"></i>
+              <span>Dashboard</span>
+            </button>
+            <button onclick="switchScreen('screen6')" id="nav-screen6" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-medium text-verazoDark hover:bg-verazoAccent/70 transition">
+              <i data-lucide="briefcase" class="w-4 h-4 text-verazoGray"></i>
+              <span>Oportunidades</span>
+            </button>
+            <button onclick="switchScreen('screen10')" id="nav-screen10" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-medium text-verazoDark hover:bg-verazoAccent/70 transition">
+              <i data-lucide="message-square" class="w-4 h-4 text-verazoGray"></i>
+              <span>Mensagens</span>
+              <span class="ml-auto bg-verazoGold text-verazoDark font-bold text-[10px] px-1.5 py-0.2 rounded-full">3</span>
+            </button>
+            <button onclick="switchScreen('screen9')" id="nav-screen9" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-medium text-verazoDark hover:bg-verazoAccent/70 transition">
+              <i data-lucide="user" class="w-4 h-4 text-verazoGray"></i>
+              <span>Meu perfil</span>
+            </button>
+            <button onclick="switchScreen('screen8')" id="nav-screen8" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-medium text-verazoDark hover:bg-verazoAccent/70 transition">
+              <i data-lucide="credit-card" class="w-4 h-4 text-verazoGray"></i>
+              <span>Planos</span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- User Profile Footer in Sidebar -->
+        <div class="p-4 border-t border-verazoBorder/60 bg-verazoBg/50">
+          <div class="flex items-center space-x-3 mb-3">
+            <div class="w-9 h-9 bg-verazoAccent border border-verazoBorder rounded-full flex items-center justify-center font-bold text-xs text-verazoDark">
+              AL
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs font-bold text-verazoDark truncate">Alex Lima</p>
+              <p class="text-[11px] text-verazoGray truncate">Desenvolvedor</p>
+              <span id="userBadge" class="inline-block text-[10px] font-semibold text-verazoGray mt-0.5">Plano gratuito</span>
+            </div>
+          </div>
+          <div class="space-y-1 text-xs">
+            <button onclick="switchScreen('screen2')" class="w-full text-left py-1 text-verazoGray hover:text-verazoDark flex items-center space-x-1.5">
+              <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+              <span>Sair</span>
+            </button>
+            <button class="w-full text-left py-1 text-red-500/80 hover:text-red-600 text-[11px]">
+              Excluir conta
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT AREA FOR DASHBOARDS -->
+      <div class="flex-1 flex flex-col overflow-hidden bg-verazoBg">
+        
+        <!-- Top Search & Header Bar -->
+        <header class="h-16 border-b border-verazoBorder/60 px-6 flex items-center justify-between shrink-0 bg-verazoBg">
+          <div class="flex items-center space-x-2 text-xs text-verazoGray">
+            <span>Olá, <strong class="text-verazoDark">Alex</strong></span>
+          </div>
+
+          <!-- Search Input -->
+          <div class="relative w-full max-w-xs md:max-w-md">
+            <i data-lucide="search" class="w-4 h-4 text-verazoGray absolute left-3 top-1/2 -translate-y-1/2"></i>
+            <input type="text" placeholder="Procurar vagas, talentos, etc..." class="w-full pl-9 pr-4 py-2 rounded-lg border border-verazoBorder bg-white text-xs focus:outline-none focus:ring-1 focus:ring-verazoGold">
+          </div>
+        </header>
+
+        <!-- SUB-SCREENS INSIDE DASHBOARD SHELL -->
+        <div class="flex-1 overflow-y-auto custom-scrollbar p-6">
+
+          <!-- ========================================================================= -->
+          <!-- TELA 6: OPORTUNIDADES / VAGAS -->
+          <!-- ========================================================================= -->
+          <div id="subscreen6" class="subscreen space-y-6 hidden">
+            <div>
+              <h1 class="text-xl font-bold text-verazoDark">Recomendações</h1>
+              <p class="text-xs text-verazoGray">Oportunidades para o próximo passo da sua carreira.</p>
+            </div>
+
+            <div class="bg-verazoAccent/30 rounded-xl p-4 border border-verazoBorder/40">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-xs font-bold text-verazoDark uppercase tracking-wide">Vagas premium recomendadas para você</h3>
+                <span class="text-[10px] bg-verazoGold/20 text-verazoDark px-2 py-0.5 rounded font-medium">Dados demonstrativos</span>
+              </div>
+              <p class="text-xs text-verazoGray">Uma seleção de oportunidades alinhadas às suas habilidades.</p>
+            </div>
+
+            <!-- GRID DE VAGAS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              
+              <!-- Card 1: Nimbo Labs -->
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-start space-x-3 mb-3">
+                    <div class="w-9 h-9 bg-emerald-100 text-emerald-800 font-bold text-xs rounded-lg flex items-center justify-center shrink-0">NL</div>
+                    <div>
+                      <h4 class="text-xs font-bold text-verazoDark">Nimbo Labs</h4>
+                      <p class="text-[10px] text-verazoGray">Empresa fictícia</p>
+                    </div>
+                  </div>
+                  <h3 class="font-bold text-sm text-verazoDark mb-1">Desenvolvedor Front-end</h3>
+                  <p class="text-[11px] text-verazoGray mb-3">Remoto · CLT · Júnior</p>
+                  <div class="flex flex-wrap gap-1.5 mb-4">
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2 py-0.5 rounded font-medium">React</span>
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2 py-0.5 rounded font-medium">TypeScript</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                  <span class="text-xs font-bold text-verazoDark">R$ 4.000 - 5.500</span>
+                  <button class="px-3 py-1.5 bg-verazoGold hover:bg-verazoGoldHover text-verazoDark font-bold text-[11px] rounded-lg transition">Ver vaga</button>
+                </div>
+              </div>
+
+              <!-- Card 2: Órbita Sistemas -->
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-start space-x-3 mb-3">
+                    <div class="w-9 h-9 bg-blue-100 text-blue-800 font-bold text-xs rounded-lg flex items-center justify-center shrink-0">OS</div>
+                    <div>
+                      <h4 class="text-xs font-bold text-verazoDark">Órbita Sistemas</h4>
+                      <p class="text-[10px] text-verazoGray">Empresa fictícia</p>
+                    </div>
+                  </div>
+                  <h3 class="font-bold text-sm text-verazoDark mb-1">Estágio em desenvolvimento</h3>
+                  <p class="text-[11px] text-verazoGray mb-3">Híbrido Recife · Estágio</p>
+                  <div class="flex flex-wrap gap-1.5 mb-4">
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2 py-0.5 rounded font-medium">JavaScript</span>
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2 py-0.5 rounded font-medium">HTML</span>
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2 py-0.5 rounded font-medium">CSS</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                  <span class="text-xs font-bold text-verazoDark">Bolsa de R$ 1.800</span>
+                  <button class="px-3 py-1.5 bg-verazoGold hover:bg-verazoGoldHover text-verazoDark font-bold text-[11px] rounded-lg transition">Ver vaga</button>
+                </div>
+              </div>
+
+              <!-- Card 3: Cobalto Digital -->
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-start space-x-3 mb-3">
+                    <div class="w-9 h-9 bg-indigo-100 text-indigo-800 font-bold text-xs rounded-lg flex items-center justify-center shrink-0">CD</div>
+                    <div>
+                      <h4 class="text-xs font-bold text-verazoDark">Cobalto Digital</h4>
+                      <p class="text-[10px] text-verazoGray">Empresa fictícia</p>
+                    </div>
+                  </div>
+                  <h3 class="font-bold text-sm text-verazoDark mb-1">Desenvolvedor Back-end</h3>
+                  <p class="text-[11px] text-verazoGray mb-3">Híbrido São Paulo · CLT-Pleno</p>
+                  <div class="flex flex-wrap gap-1.5 mb-4">
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2 py-0.5 rounded font-medium">Node.js</span>
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2 py-0.5 rounded font-medium">PostgreSQL</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                  <span class="text-xs font-bold text-verazoDark">R$ 6.500 - 8.000</span>
+                  <button class="px-3 py-1.5 bg-verazoGold hover:bg-verazoGoldHover text-verazoDark font-bold text-[11px] rounded-lg transition">Ver vaga</button>
+                </div>
+              </div>
+
+              <!-- Card 4: Vértice Apps -->
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-start space-x-3 mb-3">
+                    <div class="w-9 h-9 bg-purple-100 text-purple-800 font-bold text-xs rounded-lg flex items-center justify-center shrink-0">VA</div>
+                    <div>
+                      <h4 class="text-xs font-bold text-verazoDark">Vértice Apps</h4>
+                      <p class="text-[10px] text-verazoGray">Empresa fictícia</p>
+                    </div>
+                  </div>
+                  <h3 class="font-bold text-sm text-verazoDark mb-1">Desenvolvedor Mobile</h3>
+                  <p class="text-[11px] text-verazoGray mb-3">Remoto · PJ · Pleno</p>
+                  <div class="flex flex-wrap gap-1.5 mb-4">
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2 py-0.5 rounded font-medium">React Native</span>
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2 py-0.5 rounded font-medium">Git</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                  <span class="text-xs font-bold text-verazoDark">R$ 6.000 - 8.500</span>
+                  <button class="px-3 py-1.5 bg-verazoGold hover:bg-verazoGoldHover text-verazoDark font-bold text-[11px] rounded-lg transition">Ver vaga</button>
+                </div>
+              </div>
+
+              <!-- Card 5: Ponto Nuvem -->
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-start space-x-3 mb-3">
+                    <div class="w-9 h-9 bg-sky-100 text-sky-800 font-bold text-xs rounded-lg flex items-center justify-center shrink-0">PN</div>
+                    <div>
+                      <h4 class="text-xs font-bold text-verazoDark">Ponto Nuvem</h4>
+                      <p class="text-[10px] text-verazoGray">Empresa fictícia</p>
+                    </div>
+                  </div>
+                  <h3 class="font-bold text-sm text-verazoDark mb-1">Desenvolvedor Full Stack</h3>
+                  <p class="text-[11px] text-verazoGray mb-3">Remoto · Freelance</p>
+                  <div class="flex flex-wrap gap-1.5 mb-4">
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2 py-0.5 rounded font-medium">React</span>
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2 py-0.5 rounded font-medium">Node.js</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                  <span class="text-xs font-bold text-verazoDark">R$ 80 - 110/hora</span>
+                  <button class="px-3 py-1.5 bg-verazoGold hover:bg-verazoGoldHover text-verazoDark font-bold text-[11px] rounded-lg transition">Ver vaga</button>
+                </div>
+              </div>
+
+              <!-- Card 6: Trama Tecnologia -->
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-start space-x-3 mb-3">
+                    <div class="w-9 h-9 bg-orange-100 text-orange-800 font-bold text-xs rounded-lg flex items-center justify-center shrink-0">TT</div>
+                    <div>
+                      <h4 class="text-xs font-bold text-verazoDark">Trama Tecnologia</h4>
+                      <p class="text-[10px] text-verazoGray">Empresa fictícia</p>
+                    </div>
+                  </div>
+                  <h3 class="font-bold text-sm text-verazoDark mb-1">Desenvolvedor Python</h3>
+                  <p class="text-[11px] text-verazoGray mb-3">Remoto · CLT-Júnior</p>
+                  <div class="flex flex-wrap gap-1.5 mb-4">
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2 py-0.5 rounded font-medium">Python</span>
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2 py-0.5 rounded font-medium">Django</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                  <span class="text-xs font-bold text-verazoDark">R$ 4.500 - 6.000</span>
+                  <button class="px-3 py-1.5 bg-verazoGold hover:bg-verazoGoldHover text-verazoDark font-bold text-[11px] rounded-lg transition">Ver vaga</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- ========================================================================= -->
+          <!-- TELA 7: MEU DASHBOARD (PLANO GRATUITO) -->
+          <!-- ========================================================================= -->
+          <div id="subscreen7" class="subscreen space-y-6 hidden">
+            <div>
+              <h1 class="text-xl font-bold text-verazoDark">Meu dashboard</h1>
+              <p class="text-xs text-verazoGray">Acompanhe suas candidaturas e descubra seu próximo passo.</p>
+            </div>
+
+            <!-- METRIC CARDS TOP -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm">
+                <p class="text-xs text-verazoGray font-medium">Vagas aplicadas</p>
+                <div class="flex items-baseline space-x-1 mt-1">
+                  <span class="text-2xl font-bold text-verazoDark">0/3</span>
+                </div>
+                <p class="text-[11px] text-verazoGray mt-1">Candidaturas nesta semana</p>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm">
+                <p class="text-xs text-verazoGray font-medium">Candidaturas restantes</p>
+                <div class="flex items-baseline space-x-1 mt-1">
+                  <span class="text-2xl font-bold text-verazoDark">3</span>
+                </div>
+                <p class="text-[11px] text-verazoGray mt-1">Disponíveis nesta semana</p>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm">
+                <p class="text-xs text-verazoGray font-medium">Habilidades</p>
+                <div class="flex items-baseline space-x-1 mt-1">
+                  <span class="text-2xl font-bold text-verazoDark">5/5</span>
+                </div>
+                <p class="text-[11px] text-amber-600 font-medium mt-1">Limite do plano gratuito atingido</p>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm">
+                <div class="flex justify-between items-start">
+                  <p class="text-xs text-verazoGray font-medium">Taxa de contratação</p>
+                  <span class="text-[10px] bg-verazoAccent px-1.5 py-0.5 rounded text-verazoDark font-medium">Gratuito</span>
+                </div>
+                <div class="flex items-baseline space-x-1 mt-1">
+                  <span class="text-2xl font-bold text-verazoDark">65%</span>
+                </div>
+                <p class="text-[11px] text-verazoGray mt-1">Prévia demonstrativa Premium</p>
+              </div>
+            </div>
+
+            <!-- LOWER GRID WITH PREMIUM BLOCKED TEASERS -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder relative overflow-hidden">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="text-xs font-bold text-verazoDark">Avaliação profissional</h4>
+                  <span class="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold">Premium</span>
+                </div>
+                <p class="text-xs text-verazoGray">Acompanhe as avaliações recebidas das empresas.</p>
+                <div class="mt-4 pt-3 border-t border-gray-100 flex items-center text-[11px] text-amber-700 font-medium">
+                  <i data-lucide="lock" class="w-3.5 h-3.5 mr-1"></i> Disponível no plano Premium
+                </div>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder relative overflow-hidden">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="text-xs font-bold text-verazoDark">Empresas trabalhadas</h4>
+                  <span class="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold">Premium</span>
+                </div>
+                <p class="text-xs text-verazoGray">Visualize seu histórico de experiências na plataforma.</p>
+                <div class="mt-4 pt-3 border-t border-gray-100 flex items-center text-[11px] text-amber-700 font-medium">
+                  <i data-lucide="lock" class="w-3.5 h-3.5 mr-1"></i> Disponível no plano Premium
+                </div>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder relative overflow-hidden">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="text-xs font-bold text-verazoDark">Áreas mais demandadas em TI</h4>
+                  <span class="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold">Premium</span>
+                </div>
+                <p class="text-xs text-verazoGray">Conheça as habilidades em destaque no mercado.</p>
+                <div class="mt-4 pt-3 border-t border-gray-100 flex items-center text-[11px] text-amber-700 font-medium">
+                  <i data-lucide="lock" class="w-3.5 h-3.5 mr-1"></i> Disponível no plano Premium
+                </div>
+              </div>
+            </div>
+
+            <!-- CALL TO ACTION BANNER FOR PREMIUM -->
+            <div class="bg-gradient-to-r from-verazoAccent to-amber-100 border border-verazoGold/40 rounded-xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+              <div class="space-y-1 text-center sm:text-left">
+                <span class="text-[10px] font-bold tracking-wider text-amber-800 uppercase">MAIS POSSIBILIDADES</span>
+                <h3 class="text-base font-bold text-verazoDark">Assine o plano Premium para mais autonomia!</h3>
+                <p class="text-xs text-verazoGray">Desbloqueie candidaturas ilimitadas e relatórios avançados.</p>
+              </div>
+              <button onclick="switchScreen('screen8')" class="px-5 py-3 bg-verazoGold hover:bg-verazoGoldHover text-verazoDark font-bold text-xs uppercase tracking-wider rounded-lg transition shadow">
+                CONHECER O PREMIUM
+              </button>
+            </div>
+          </div>
+
+
+          <!-- ========================================================================= -->
+          <!-- TELA 8: MEU DASHBOARD (PLANO PREMIUM ATIVO) -->
+          <!-- ========================================================================= -->
+          <div id="subscreen8" class="subscreen space-y-6 hidden">
+            <div>
+              <h1 class="text-xl font-bold text-verazoDark">Meu dashboard</h1>
+              <p class="text-xs text-verazoGray">Sua carreira com mais autonomia. Todos os recursos Premium estão ativos.</p>
+            </div>
+
+            <!-- METRIC CARDS PREMIUM -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm">
+                <p class="text-xs text-verazoGray font-medium">Vagas aplicadas</p>
+                <div class="flex items-baseline space-x-1 mt-1">
+                  <span class="text-2xl font-bold text-verazoDark">0/∞</span>
+                </div>
+                <p class="text-[11px] text-emerald-600 font-medium mt-1">Candidaturas sem limite semanal</p>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm">
+                <p class="text-xs text-verazoGray font-medium">Candidaturas restantes</p>
+                <div class="flex items-baseline space-x-1 mt-1">
+                  <span class="text-2xl font-bold text-verazoDark">Ilimitadas</span>
+                </div>
+                <p class="text-[11px] text-verazoGray mt-1">Mais autonomia para se candidatar</p>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm">
+                <p class="text-xs text-verazoGray font-medium">Habilidades</p>
+                <div class="flex items-baseline space-x-1 mt-1">
+                  <span class="text-2xl font-bold text-verazoDark">5/20</span>
+                </div>
+                <p class="text-[11px] text-verazoGray mt-1">15 espaços disponíveis no perfil</p>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm">
+                <div class="flex justify-between items-start">
+                  <p class="text-xs text-verazoGray font-medium">Taxa de contratação</p>
+                  <span class="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded font-bold">Premium</span>
+                </div>
+                <div class="flex items-baseline space-x-1 mt-1">
+                  <span class="text-2xl font-bold text-verazoDark">65%</span>
+                </div>
+                <p class="text-[11px] text-verazoGray mt-1">Exemplo ilustrativo Premium ativo</p>
+              </div>
+            </div>
+
+            <!-- UNLOCKED PREMIUM CARDS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder">
+                <h4 class="text-xs font-bold text-verazoDark mb-1">Avaliação profissional</h4>
+                <div class="flex items-center space-x-1 my-2">
+                  <i data-lucide="star" class="w-4 h-4 text-gray-300"></i>
+                  <span class="text-xs text-verazoGray">Sem nota (0 avaliações)</span>
+                </div>
+                <p class="text-xs text-verazoGray">As avaliações aparecerão aqui conforme concluir processos.</p>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder">
+                <h4 class="text-xs font-bold text-verazoDark mb-1">Empresas trabalhadas</h4>
+                <div class="flex items-baseline space-x-2 my-2">
+                  <span class="text-2xl font-bold text-verazoDark">1</span>
+                  <span class="text-xs text-verazoGray">Empresa na sua trajetória</span>
+                </div>
+                <p class="text-xs text-verazoGray">Histórico profissional disponível para recrutadores.</p>
+              </div>
+            </div>
+
+            <!-- PREMIUM ACTIVE BANNER -->
+            <div class="bg-verazoDark text-white rounded-xl p-5 border border-verazoGold/50 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div class="space-y-2">
+                <div class="inline-flex items-center space-x-2 bg-verazoGold text-verazoDark text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">
+                  <i data-lucide="check-circle" class="w-3 h-3"></i>
+                  <span>SEU PREMIUM ESTÁ ATIVO</span>
+                </div>
+                <h3 class="text-lg font-bold">Mais foco na sua carreira.</h3>
+                <ul class="text-xs text-gray-300 space-y-1">
+                  <li class="flex items-center"><i data-lucide="check" class="w-3.5 h-3.5 text-verazoGold mr-1.5"></i> Sem anúncios</li>
+                  <li class="flex items-center"><i data-lucide="check" class="w-3.5 h-3.5 text-verazoGold mr-1.5"></i> Sem taxas freelancer</li>
+                  <li class="flex items-center"><i data-lucide="check" class="w-3.5 h-3.5 text-verazoGold mr-1.5"></i> Relatórios avançados liberados</li>
+                </ul>
+              </div>
+              <div class="text-right">
+                <span class="text-xs text-gray-400 block mb-1">Status da conta</span>
+                <span class="text-sm font-bold text-verazoGold border border-verazoGold/40 px-3 py-1 rounded-lg inline-block">Ativo até 2027</span>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ========================================================================= -->
+          <!-- TELA 9: INDICADORES PROFISSIONAIS -->
+          <!-- ========================================================================= -->
+          <div id="subscreen9" class="subscreen space-y-6 hidden">
+            <div>
+              <h1 class="text-xl font-bold text-verazoDark">Indicadores profissionais</h1>
+              <p class="text-xs text-verazoGray">Uma visão do seu perfil e das suas oportunidades no Verazo.</p>
+            </div>
+
+            <!-- STATS GRID -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm">
+                <p class="text-xs text-verazoGray font-medium">Perfil completo</p>
+                <div class="flex items-baseline space-x-1 mt-1">
+                  <span class="text-2xl font-bold text-verazoDark">78%</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-1.5 mt-2">
+                  <div class="bg-verazoGold h-1.5 rounded-full" style="width: 78%"></div>
+                </div>
+                <p class="text-[10px] text-verazoGray mt-1">Continue atualizando seu perfil</p>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm">
+                <p class="text-xs text-verazoGray font-medium">Média de avaliação</p>
+                <div class="flex items-center space-x-1 mt-1">
+                  <i data-lucide="star" class="w-5 h-5 text-gray-300"></i>
+                  <span class="text-xl font-bold text-verazoDark">--</span>
+                </div>
+                <p class="text-[10px] text-verazoGray mt-1">Sem nota (0 avaliações)</p>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm">
+                <p class="text-xs text-verazoGray font-medium">Empresas trabalhadas</p>
+                <div class="flex items-baseline space-x-1 mt-1">
+                  <span class="text-2xl font-bold text-verazoDark">1</span>
+                </div>
+                <p class="text-[10px] text-verazoGray mt-1">No seu histórico</p>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-verazoBorder shadow-sm">
+                <p class="text-xs text-verazoGray font-medium">Propostas recebidas</p>
+                <div class="flex items-baseline space-x-1 mt-1">
+                  <span class="text-2xl font-bold text-verazoDark">0</span>
+                </div>
+                <p class="text-[10px] text-verazoGray mt-1">Total enviado / recebidas</p>
+              </div>
+            </div>
+
+            <!-- DETAILED SECTIONS GRID -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              
+              <!-- Minhas candidaturas -->
+              <div class="bg-white p-5 rounded-xl border border-verazoBorder shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-sm font-bold text-verazoDark">Minhas candidaturas</h3>
+                  <span class="text-xs text-verazoGray">2 candidaturas</span>
+                </div>
+
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between p-3 bg-verazoBg rounded-lg border border-verazoBorder/60">
+                    <div>
+                      <h4 class="text-xs font-bold text-verazoDark">Desenvolvedor Front-end</h4>
+                      <p class="text-[10px] text-verazoGray">devs · 24/10/2026</p>
+                    </div>
+                    <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">Pendente</span>
+                  </div>
+
+                  <div class="flex items-center justify-between p-3 bg-verazoBg rounded-lg border border-verazoBorder/60">
+                    <div>
+                      <h4 class="text-xs font-bold text-verazoDark">Desenvolvedor React</h4>
+                      <p class="text-[10px] text-verazoGray">devs · 24/10/2026</p>
+                    </div>
+                    <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Aceita</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Propostas / Habilidades -->
+              <div class="bg-white p-5 rounded-xl border border-verazoBorder shadow-sm flex flex-col justify-between">
+                <div>
+                  <h3 class="text-sm font-bold text-verazoDark mb-2">Propostas recebidas</h3>
+                  <p class="text-xs text-verazoGray mb-4">Nenhuma proposta ainda. Suas novas propostas aparecerão aqui.</p>
+                </div>
+
+                <div class="pt-4 border-t border-gray-100">
+                  <div class="flex justify-between text-xs font-bold text-verazoDark mb-2">
+                    <span>Habilidades cadastradas</span>
+                    <span>5 / 20</span>
+                  </div>
+                  <div class="flex flex-wrap gap-1.5">
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2.5 py-1 rounded-md font-medium">React</span>
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2.5 py-1 rounded-md font-medium">Node.js</span>
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2.5 py-1 rounded-md font-medium">TypeScript</span>
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2.5 py-1 rounded-md font-medium">JavaScript</span>
+                    <span class="bg-verazoLightGray text-verazoDark text-[10px] px-2.5 py-1 rounded-md font-medium">Tailwind CSS</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- ========================================================================= -->
+          <!-- TELA 10: MENSAGENS / CHAT -->
+          <!-- ========================================================================= -->
+          <div id="subscreen10" class="subscreen h-full flex flex-col hidden">
+            <div class="mb-4">
+              <h1 class="text-xl font-bold text-verazoDark">Mensagens</h1>
+              <p class="text-xs text-verazoGray">Converse com as empresas e acompanhe suas oportunidades.</p>
+            </div>
+
+            <!-- CHAT CONTAINER -->
+            <div class="flex-1 bg-white rounded-xl border border-verazoBorder flex flex-col md:flex-row overflow-hidden min-h-[520px]">
+              
+              <!-- Chat list sidebar -->
+              <div class="w-full md:w-72 border-r border-verazoBorder bg-verazoBg/40 flex flex-col">
+                <div class="p-3 border-b border-verazoBorder/60">
+                  <span class="text-xs font-bold text-verazoDark">Conversas (3)</span>
+                </div>
+                <div class="divide-y divide-verazoBorder/40 overflow-y-auto">
+                  
+                  <!-- Conversation 1 (Active) -->
+                  <button class="w-full p-3 text-left bg-white border-l-4 border-verazoGold flex items-start space-x-3 transition">
+                    <div class="w-8 h-8 bg-slate-800 text-white font-bold text-xs rounded-full flex items-center justify-center shrink-0">d</div>
+                    <div class="flex-1 min-w-0">
+                      <div class="flex justify-between items-baseline mb-0.5">
+                        <h4 class="text-xs font-bold text-verazoDark truncate">devs</h4>
+                        <span class="text-[10px] text-verazoGray">10:34</span>
+                      </div>
+                      <p class="text-[10px] text-verazoGray font-medium truncate">Desenvolvedor React · Processo seletivo</p>
+                      <p class="text-[11px] text-verazoDark truncate mt-1">Você: Sim, esse horário funciona...</p>
+                    </div>
+                  </button>
+
+                  <!-- Conversation 2 -->
+                  <button class="w-full p-3 text-left hover:bg-white/80 flex items-start space-x-3 transition">
+                    <div class="w-8 h-8 bg-emerald-100 text-emerald-800 font-bold text-xs rounded-full flex items-center justify-center shrink-0">NL</div>
+                    <div class="flex-1 min-w-0">
+                      <div class="flex justify-between items-baseline mb-0.5">
+                        <h4 class="text-xs font-bold text-verazoDark truncate">Nimbo Labs</h4>
+                        <span class="text-[10px] text-verazoGray">Ontem</span>
+                      </div>
+                      <p class="text-[11px] text-verazoGray truncate">Obrigado pelo seu interesse.</p>
+                    </div>
+                  </button>
+
+                  <!-- Conversation 3 -->
+                  <button class="w-full p-3 text-left hover:bg-white/80 flex items-start space-x-3 transition">
+                    <div class="w-8 h-8 bg-sky-100 text-sky-800 font-bold text-xs rounded-full flex items-center justify-center shrink-0">PN</div>
+                    <div class="flex-1 min-w-0">
+                      <div class="flex justify-between items-baseline mb-0.5">
+                        <h4 class="text-xs font-bold text-verazoDark truncate">Ponto Nuvem</h4>
+                        <span class="text-[10px] text-verazoGray">24 out</span>
+                      </div>
+                      <p class="text-[11px] text-verazoGray truncate">Recebemos sua candidatura.</p>
+                    </div>
+                  </button>
+
+                </div>
+              </div>
+
+              <!-- Main Chat Area -->
+              <div class="flex-1 flex flex-col bg-white">
+                
+                <!-- Chat Header -->
+                <div class="p-3.5 border-b border-verazoBorder flex items-center justify-between bg-white">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-slate-800 text-white font-bold text-xs rounded-full flex items-center justify-center">d</div>
+                    <div>
+                      <h3 class="text-xs font-bold text-verazoDark">devs</h3>
+                      <p class="text-[10px] text-verazoGray">Desenvolvedor React · Processo seletivo</p>
+                    </div>
+                  </div>
+                  <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-bold">Premium</span>
+                </div>
+
+                <!-- Chat Messages Scroll Area -->
+                <div class="flex-1 p-4 overflow-y-auto space-y-4 bg-verazoBg/20 text-xs custom-scrollbar">
+                  
+                  <div class="text-center my-2">
+                    <span class="bg-verazoLightGray text-verazoGray text-[10px] px-2.5 py-1 rounded-full font-medium">Hoje, 29 de outubro</span>
+                  </div>
+
+                  <!-- Message Received -->
+                  <div class="flex items-start space-x-2 max-w-[80%]">
+                    <div class="w-7 h-7 bg-slate-800 text-white font-bold text-[10px] rounded-full flex items-center justify-center shrink-0 mt-0.5">d</div>
+                    <div class="bg-verazoBg border border-verazoBorder/80 p-3 rounded-2xl rounded-tl-none space-y-1">
+                      <p class="text-verazoDark">Olá, Alex! Analisamos seu perfil e gostaríamos de conversar sobre a vaga de Desenvolvedor React.</p>
+                      <span class="text-[9px] text-verazoGray block text-right">10:30</span>
+                    </div>
+                  </div>
+
+                  <!-- Message Sent -->
+                  <div class="flex items-start justify-end space-x-2 ml-auto max-w-[80%]">
+                    <div class="bg-verazoGold/20 border border-verazoGold/40 p-3 rounded-2xl rounded-tr-none space-y-1">
+                      <p class="text-verazoDark">Olá! Obrigado pelo contato. Tenho interesse em conhecer melhor a oportunidade.</p>
+                      <span class="text-[9px] text-verazoGray block text-right">10:32</span>
+                    </div>
+                  </div>
+
+                  <!-- Message Received -->
+                  <div class="flex items-start space-x-2 max-w-[80%]">
+                    <div class="w-7 h-7 bg-slate-800 text-white font-bold text-[10px] rounded-full flex items-center justify-center shrink-0 mt-0.5">d</div>
+                    <div class="bg-verazoBg border border-verazoBorder/80 p-3 rounded-2xl rounded-tl-none space-y-1">
+                      <p class="text-verazoDark">Podemos agendar uma conversa amanhã, às 14h? A entrevista será on-line.</p>
+                      <span class="text-[9px] text-verazoGray block text-right">10:33</span>
+                    </div>
+                  </div>
+
+                  <!-- Message Sent -->
+                  <div class="flex items-start justify-end space-x-2 ml-auto max-w-[80%]">
+                    <div class="bg-verazoGold/20 border border-verazoGold/40 p-3 rounded-2xl rounded-tr-none space-y-1">
+                      <p class="text-verazoDark">Sim, esse horário funciona para mim. Fico no aguardo do convite. Obrigado!</p>
+                      <span class="text-[9px] text-verazoGray block text-right">10:34</span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Input Footer -->
+                <div class="p-3 border-t border-verazoBorder bg-white">
+                  <form onsubmit="event.preventDefault();" class="flex items-center space-x-2">
+                    <input type="text" placeholder="Escreva uma mensagem" class="flex-1 px-4 py-2.5 border border-verazoBorder rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-verazoGold">
+                    <button type="submit" class="px-4 py-2.5 bg-verazoGold hover:bg-verazoGoldHover text-verazoDark font-bold text-xs rounded-lg transition shrink-0">
+                      Enviar
+                    </button>
+                  </form>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- JAVASCRIPT SWITCHING LOGIC -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Screen Switching Logic
+    function switchScreen(screenId) {
+      // Update dropdown selector value
+      document.getElementById('screenSelect').value = screenId;
+
+      // Hide all root screens
+      const screens = document.querySelectorAll('.screen-content');
+      screens.forEach(s => s.classList.add('hidden'));
+
+      // Dashboard App Shell Container
+      const appShell = document.getElementById('appShell');
+
+      // Dashboard Subscreens IDs
+      const subScreenMap = {
+        'screen6': 'subscreen6',
+        'screen7': 'subscreen7',
+        'screen8': 'subscreen8',
+        'screen9': 'subscreen9',
+        'screen10': 'subscreen10'
+      };
+
+      if (subScreenMap[screenId]) {
+        // Show Shell
+        appShell.classList.remove('hidden');
+
+        // Hide all subscreens
+        const subscreens = document.querySelectorAll('.subscreen');
+        subscreens.forEach(sub => sub.classList.add('hidden'));
+
+        // Show selected subscreen
+        const targetSubscreen = document.getElementById(subScreenMap[screenId]);
+        if (targetSubscreen) {
+          targetSubscreen.classList.remove('hidden');
+        }
+
+        // Update active class on navigation sidebar
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+          btn.classList.remove('bg-verazoGold', 'font-bold');
+          btn.classList.add('text-verazoDark');
+        });
+
+        const activeNavBtn = document.getElementById('nav-' + screenId);
+        if (activeNavBtn) {
+          activeNavBtn.classList.add('bg-verazoGold', 'font-bold');
+        }
+
+        // Update user badge depending on screen 8 (Premium Demo) or 7 (Free Demo)
+        const userBadge = document.getElementById('userBadge');
+        if (userBadge) {
+          if (screenId === 'screen8' || screenId === 'screen9' || screenId === 'screen10') {
+            userBadge.innerText = 'Premium ativo';
+            userBadge.className = 'inline-block text-[10px] font-bold text-amber-700 bg-amber-100 px-1.5 py-0.2 rounded mt-0.5';
+          } else {
+            userBadge.innerText = 'Plano gratuito';
+            userBadge.className = 'inline-block text-[10px] font-semibold text-verazoGray mt-0.5';
+          }
+        }
+
+      } else {
+        // Auth screens (1 to 5)
+        const targetScreen = document.getElementById(screenId);
+        if (targetScreen) {
+          targetScreen.classList.remove('hidden');
+        }
+      }
+
+      // Re-render icons if needed
+      lucide.createIcons();
+    }
+
+    // Default screen load
+    window.addEventListener('DOMContentLoaded', () => {
+      switchScreen('screen1');
+    });
+  </script>
+</body>
+</html>
